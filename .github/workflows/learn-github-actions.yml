@@ -1,14 +1,19 @@
-뭘봐 — 오늘 오후 2:24
 name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+on:
+  push:
+    branches:
+      - main
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-uses: actions/checkout@v3
-uses: actions/setup-node@v3
-with:
-  node-version: '14'
-run: npm install -g bats
-run: bats -v
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - name: Install Bats
+        run: npm install -g bats
+      - name: Check Bats version
+        run: bats -v
